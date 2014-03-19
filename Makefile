@@ -16,12 +16,18 @@ endif
 LDFLAGS_TEST = -L$(FTDIR)/lib -lftcommon -Wl,-rpath,$(FTDIR)/lib
 LDFLAGS_TEST += -lftgetnextline -lftastr
 
-LDFLAGS = -shared $(LDFLAGS_TEST)
+OS = $(shell uname -s)
+ifeq ($(OS),Darwin)
+	SHORTNAME = libftflagger.dylib
+	LDFLAGS = -dynamiclib $(LDFLAGS_TEST) -install_name @rpath/$(SHORTNAME)
+else
+	SHORTNAME = libftflagger.so
+	LDFLAGS = -shared $(LDFLAGS_TEST)
+endif
 
 LD_LIBRARY_PATH=$(FTDIR)/lib:$(LD_LIBRARY_PATH)
 
 NAME = $(LIBDIR)/$(SHORTNAME)
-SHORTNAME = libftflagger.so
 
 SRCS =	ft_flagger.c \
 		ft_flagger_parse.c \
