@@ -12,6 +12,7 @@ struct		s_flagger
 	t_flag	*m_begin;
 	t_flag	*m_end;
 	t_bool	m_error;
+	t_bool	m_stop_single_tiret;
 	char	*prog_name;
 	t_bool	(*parse)(t_flagger *, char ***);
 	t_bool	(*is_active)(t_flagger *, char *flag);

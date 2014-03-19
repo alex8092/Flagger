@@ -46,6 +46,8 @@ static t_bool	ft_flagger_parse_arg(t_flagger *flag, char ***argv)
 		++(*argv);
 		return (false);
 	}
+	else if ((*argv)[0][1] == 0 && flag->m_stop_single_tiret)
+		return (false);
 	else if ((*argv)[0][1] != '-')
 		return (ft_flagger_single(flag, argv));
 	return (ft_flagger_mult(flag, argv));
